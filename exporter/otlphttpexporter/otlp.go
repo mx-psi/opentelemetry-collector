@@ -42,13 +42,12 @@ import (
 )
 
 type exporter struct {
-	// Input configuration.
 	config     *Config
 	client     *http.Client
+	logger     *zap.Logger
 	tracesURL  string
 	metricsURL string
 	logsURL    string
-	logger     *zap.Logger
 }
 
 const (

@@ -163,20 +163,11 @@ type (
 //
 // For an overview about the internals of the Manager refer to the package README.md.
 type Manager struct {
-	// configSources is map from ConfigSource names (as defined in the configuration)
-	// and the respective instances.
 	configSources map[string]configsource.ConfigSource
-	// watchers keeps track of all WatchForUpdate functions for retrieved values.
-	watchers []configsource.Watchable
-	// watchersWG is used to ensure that Close waits for all WatchForUpdate calls
-	// to complete.
-	watchersWG sync.WaitGroup
-	// watchingCh is used to notify users of the Manager that the WatchForUpdate function
-	// is ready and waiting for notifications.
-	watchingCh chan struct{}
-	// closeCh is used to notify the Manager WatchForUpdate function that the manager
-	// is being closed.
-	closeCh chan struct{}
+	watchingCh    chan struct{}
+	closeCh       chan struct{}
+	watchers      []configsource.Watchable
+	watchersWG    sync.WaitGroup
 }
 
 // NewManager creates a new instance of a Manager to be used to inject data from

@@ -56,10 +56,9 @@ func (scs *SharedComponents) GetOrAdd(key interface{}, create func() component.C
 // When stopped it is removed from the SharedComponents map.
 type SharedComponent struct {
 	component.Component
-
+	removeFunc func()
 	startOnce  sync.Once
 	stopOnce   sync.Once
-	removeFunc func()
 }
 
 // Unwrap returns the original component.

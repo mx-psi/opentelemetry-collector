@@ -97,10 +97,10 @@ type SummaryPipelinesTableData struct {
 type SummaryPipelinesTableRowData struct {
 	FullName    string
 	InputType   string
-	MutatesData bool
 	Receivers   []string
 	Processors  []string
 	Exporters   []string
+	MutatesData bool
 }
 
 // WriteHTMLPipelinesSummaryTable writes the summary table for one component type (receivers, processors, exporters).

@@ -43,15 +43,15 @@ func BuildProcessorCustomMetricName(configType, metric string) string {
 
 // Processor is a helper to add observability to a component.Processor.
 type Processor struct {
-	level    configtelemetry.Level
 	mutators []tag.Mutator
+	level    configtelemetry.Level
 }
 
 // ProcessorSettings are settings for creating a Processor.
 type ProcessorSettings struct {
-	Level                   configtelemetry.Level
-	ProcessorID             config.ComponentID
 	ProcessorCreateSettings component.ProcessorCreateSettings
+	ProcessorID             config.ComponentID
+	Level                   configtelemetry.Level
 }
 
 // NewProcessor creates a new Processor.

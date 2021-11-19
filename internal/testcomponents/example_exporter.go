@@ -29,11 +29,11 @@ var _ config.Unmarshallable = (*ExampleExporter)(nil)
 // ExampleExporter is for testing purposes. We are defining an example config and factory
 // for "exampleexporter" exporter type.
 type ExampleExporter struct {
-	config.ExporterSettings `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct
-	ExtraInt                int32                    `mapstructure:"extra_int"`
-	ExtraSetting            string                   `mapstructure:"extra"`
-	ExtraMapSetting         map[string]string        `mapstructure:"extra_map"`
-	ExtraListSetting        []string                 `mapstructure:"extra_list"`
+	ExtraMapSetting         map[string]string `mapstructure:"extra_map"`
+	config.ExporterSettings `mapstructure:",squash"`
+	ExtraSetting            string   `mapstructure:"extra"`
+	ExtraListSetting        []string `mapstructure:"extra_list"`
+	ExtraInt                int32    `mapstructure:"extra_int"`
 }
 
 // Unmarshal a viper data into the config struct

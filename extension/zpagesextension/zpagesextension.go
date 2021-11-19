@@ -26,8 +26,8 @@ import (
 type zpagesExtension struct {
 	config *Config
 	logger *zap.Logger
-	server http.Server
 	stopCh chan struct{}
+	server http.Server
 }
 
 func (zpe *zpagesExtension) Start(_ context.Context, host component.Host) error {

@@ -31,17 +31,17 @@ import (
 
 // Exporter is a helper to add observability to a component.Exporter.
 type Exporter struct {
-	level          configtelemetry.Level
+	tracer         trace.Tracer
 	spanNamePrefix string
 	mutators       []tag.Mutator
-	tracer         trace.Tracer
+	level          configtelemetry.Level
 }
 
 // ExporterSettings are settings for creating an Exporter.
 type ExporterSettings struct {
-	Level                  configtelemetry.Level
-	ExporterID             config.ComponentID
 	ExporterCreateSettings component.ExporterCreateSettings
+	ExporterID             config.ComponentID
+	Level                  configtelemetry.Level
 }
 
 // NewExporter creates a new Exporter.

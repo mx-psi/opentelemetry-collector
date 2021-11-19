@@ -24,10 +24,10 @@ import (
 )
 
 type ErrOrSinkConsumer struct {
+	consumeError error
 	*consumertest.TracesSink
 	*consumertest.MetricsSink
-	mu           sync.Mutex
-	consumeError error // to be returned by ConsumeTraces, if set
+	mu sync.Mutex
 }
 
 // SetConsumeError sets an error that will be returned by the Consume function.

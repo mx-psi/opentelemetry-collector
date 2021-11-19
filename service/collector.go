@@ -63,25 +63,17 @@ const (
 
 // Collector represents a server providing the OpenTelemetry Collector service.
 type Collector struct {
-	set    CollectorSettings
-	logger *zap.Logger
-
 	tracerProvider      trace.TracerProvider
 	meterProvider       metric.MeterProvider
+	service             *service
+	logger              *zap.Logger
 	zPagesSpanProcessor *zpages.SpanProcessor
-
-	cfgW         *configWatcher
-	service      *service
-	stateChannel chan State
-
-	// shutdownChan is used to terminate the collector.
-	shutdownChan chan struct{}
-
-	// signalsChannel is used to receive termination signals from the OS.
-	signalsChannel chan os.Signal
-
-	// asyncErrorChannel is used to signal a fatal error from any component.
-	asyncErrorChannel chan error
+	cfgW                *configWatcher
+	stateChannel        chan State
+	shutdownChan        chan struct{}
+	signalsChannel      chan os.Signal
+	asyncErrorChannel   chan error
+	set                 CollectorSettings
 }
 
 // New creates and returns a new instance of Collector.

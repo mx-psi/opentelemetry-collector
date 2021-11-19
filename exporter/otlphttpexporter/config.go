@@ -22,23 +22,14 @@ import (
 
 // Config defines configuration for OTLP/HTTP exporter.
 type Config struct {
-	config.ExporterSettings       `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct
-	confighttp.HTTPClientSettings `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct.
-	exporterhelper.QueueSettings  `mapstructure:"sending_queue"`
+	config.ExporterSettings       `mapstructure:",squash"`
+	TracesEndpoint                string `mapstructure:"traces_endpoint"`
+	MetricsEndpoint               string `mapstructure:"metrics_endpoint"`
+	LogsEndpoint                  string `mapstructure:"logs_endpoint"`
+	Compression                   string `mapstructure:"compression"`
+	confighttp.HTTPClientSettings `mapstructure:",squash"`
 	exporterhelper.RetrySettings  `mapstructure:"retry_on_failure"`
-
-	// The URL to send traces to. If omitted the Endpoint + "/v1/traces" will be used.
-	TracesEndpoint string `mapstructure:"traces_endpoint"`
-
-	// The URL to send metrics to. If omitted the Endpoint + "/v1/metrics" will be used.
-	MetricsEndpoint string `mapstructure:"metrics_endpoint"`
-
-	// The URL to send logs to. If omitted the Endpoint + "/v1/logs" will be used.
-	LogsEndpoint string `mapstructure:"logs_endpoint"`
-
-	// The compression key for supported compression types within
-	// collector. Currently the only supported mode is `gzip`.
-	Compression string `mapstructure:"compression"`
+	exporterhelper.QueueSettings  `mapstructure:"sending_queue"`
 }
 
 var _ config.Exporter = (*Config)(nil)

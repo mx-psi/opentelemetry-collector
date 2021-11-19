@@ -54,8 +54,8 @@ func Apply(cfg map[string]bool) {
 }
 
 type registry struct {
-	sync.RWMutex
 	gates map[string]Gate
+	sync.RWMutex
 }
 
 func (r *registry) apply(cfg map[string]bool) {

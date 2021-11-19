@@ -134,11 +134,11 @@ type onRequestHandlingFinishedFunc func(*zap.Logger, request, error) error
 
 type retrySender struct {
 	traceAttribute     attribute.KeyValue
-	cfg                RetrySettings
 	nextSender         requestSender
 	stopCh             chan struct{}
 	logger             *zap.Logger
 	onTemporaryFailure onRequestHandlingFinishedFunc
+	cfg                RetrySettings
 }
 
 // send implements the requestSender interface

@@ -34,18 +34,14 @@ import (
 )
 
 type exporter struct {
-	// Input configuration.
-	config *Config
-
-	// gRPC clients and connection.
-	traceExporter  otlpgrpc.TracesClient
+	settings       component.TelemetrySettings
 	metricExporter otlpgrpc.MetricsClient
 	logExporter    otlpgrpc.LogsClient
+	traceExporter  otlpgrpc.TracesClient
+	config         *Config
 	clientConn     *grpc.ClientConn
 	metadata       metadata.MD
 	callOptions    []grpc.CallOption
-
-	settings component.TelemetrySettings
 }
 
 // Crete new exporter and start it. The exporter will begin connecting but

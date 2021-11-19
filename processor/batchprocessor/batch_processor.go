@@ -40,20 +40,17 @@ import (
 // - batch size reaches cfg.SendBatchSize
 // - cfg.Timeout is elapsed since the timestamp when the previous batch was sent out.
 type batchProcessor struct {
-	logger           *zap.Logger
 	exportCtx        context.Context
+	batch            batch
+	logger           *zap.Logger
 	timer            *time.Timer
+	newItem          chan interface{}
+	shutdownC        chan struct{}
 	timeout          time.Duration
 	sendBatchSize    int
 	sendBatchMaxSize int
-
-	newItem chan interface{}
-	batch   batch
-
-	shutdownC  chan struct{}
-	goroutines sync.WaitGroup
-
-	telemetryLevel configtelemetry.Level
+	goroutines       sync.WaitGroup
+	telemetryLevel   configtelemetry.Level
 }
 
 type batch interface {
@@ -222,9 +219,9 @@ func newBatchLogsProcessor(set component.ProcessorCreateSettings, next consumer.
 
 type batchTraces struct {
 	nextConsumer consumer.Traces
+	sizer        pdata.TracesSizer
 	traceData    pdata.Traces
 	spanCount    int
-	sizer        pdata.TracesSizer
 }
 
 func newBatchTraces(nextConsumer consumer.Traces) *batchTraces {
@@ -266,9 +263,9 @@ func (bt *batchTraces) size() int {
 
 type batchMetrics struct {
 	nextConsumer   consumer.Metrics
+	sizer          pdata.MetricsSizer
 	metricData     pdata.Metrics
 	dataPointCount int
-	sizer          pdata.MetricsSizer
 }
 
 func newBatchMetrics(nextConsumer consumer.Metrics) *batchMetrics {
@@ -309,9 +306,9 @@ func (bm *batchMetrics) add(item interface{}) {
 
 type batchLogs struct {
 	nextConsumer consumer.Logs
+	sizer        pdata.LogsSizer
 	logData      pdata.Logs
 	logCount     int
-	sizer        pdata.LogsSizer
 }
 
 func newBatchLogs(nextConsumer consumer.Logs) *batchLogs {

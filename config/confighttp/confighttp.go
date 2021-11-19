@@ -34,30 +34,14 @@ import (
 
 // HTTPClientSettings defines settings for creating an HTTP client.
 type HTTPClientSettings struct {
-	// The target URL to send data to (e.g.: http://some.url:9411/v1/traces).
-	Endpoint string `mapstructure:"endpoint"`
-
-	// TLSSetting struct exposes TLS client configuration.
-	TLSSetting configtls.TLSClientSetting `mapstructure:"tls,omitempty"`
-
-	// ReadBufferSize for HTTP client. See http.Transport.ReadBufferSize.
-	ReadBufferSize int `mapstructure:"read_buffer_size"`
-
-	// WriteBufferSize for HTTP client. See http.Transport.WriteBufferSize.
-	WriteBufferSize int `mapstructure:"write_buffer_size"`
-
-	// Timeout parameter configures `http.Client.Timeout`.
-	Timeout time.Duration `mapstructure:"timeout,omitempty"`
-
-	// Additional headers attached to each HTTP request sent by the client.
-	// Existing header values are overwritten if collision happens.
-	Headers map[string]string `mapstructure:"headers,omitempty"`
-
-	// Custom Round Tripper to allow for individual components to intercept HTTP requests
 	CustomRoundTripper func(next http.RoundTripper) (http.RoundTripper, error)
-
-	// Auth configuration for outgoing HTTP calls.
-	Auth *configauth.Authentication `mapstructure:"auth,omitempty"`
+	Auth               *configauth.Authentication `mapstructure:"auth,omitempty"`
+	Headers            map[string]string          `mapstructure:"headers,omitempty"`
+	Endpoint           string                     `mapstructure:"endpoint"`
+	TLSSetting         configtls.TLSClientSetting `mapstructure:"tls,omitempty"`
+	ReadBufferSize     int                        `mapstructure:"read_buffer_size"`
+	WriteBufferSize    int                        `mapstructure:"write_buffer_size"`
+	Timeout            time.Duration              `mapstructure:"timeout,omitempty"`
 }
 
 // ToClient creates an HTTP client.

@@ -58,8 +58,8 @@ type collectorTelemetryExporter interface {
 }
 
 type colTelemetry struct {
-	views      []*view.View
 	server     *http.Server
+	views      []*view.View
 	doInitOnce sync.Once
 }
 

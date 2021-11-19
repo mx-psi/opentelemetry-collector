@@ -33,9 +33,9 @@ type CreateServiceExtension func(context.Context, component.ExtensionCreateSetti
 
 type factory struct {
 	internalinterface.BaseInternal
-	cfgType                config.Type
 	createDefaultConfig    CreateDefaultConfig
 	createServiceExtension CreateServiceExtension
+	cfgType                config.Type
 }
 
 // NewFactory returns a component.ExtensionFactory.

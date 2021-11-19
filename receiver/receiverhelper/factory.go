@@ -62,11 +62,11 @@ type CreateLogsReceiver func(context.Context, component.ReceiverCreateSettings, 
 
 type factory struct {
 	internalinterface.BaseInternal
-	cfgType               config.Type
 	createDefaultConfig   CreateDefaultConfig
 	createTracesReceiver  CreateTracesReceiver
 	createMetricsReceiver CreateMetricsReceiver
 	createLogsReceiver    CreateLogsReceiver
+	cfgType               config.Type
 }
 
 // NewFactory returns a component.ReceiverFactory.

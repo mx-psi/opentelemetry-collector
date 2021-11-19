@@ -27,11 +27,11 @@ import (
 
 // ProcessMetricsViews is a struct that contains views related to process metrics (cpu, mem, etc)
 type ProcessMetricsViews struct {
-	prevTimeUnixNano int64
-	ballastSizeBytes uint64
-	views            []*view.View
 	done             chan struct{}
 	proc             *process.Process
+	views            []*view.View
+	prevTimeUnixNano int64
+	ballastSizeBytes uint64
 }
 
 var mUptime = stats.Float64(

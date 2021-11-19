@@ -58,13 +58,13 @@ func DefaultQueueSettings() QueueSettings {
 }
 
 type queuedRetrySender struct {
-	fullName        string
-	cfg             QueueSettings
 	consumerSender  requestSender
 	queue           internal.ProducerConsumerQueue
-	retryStopCh     chan struct{}
-	traceAttributes []attribute.KeyValue
 	logger          *zap.Logger
+	retryStopCh     chan struct{}
+	fullName        string
+	traceAttributes []attribute.KeyValue
+	cfg             QueueSettings
 }
 
 func newQueuedRetrySender(id config.ComponentID, _ config.DataType, qCfg QueueSettings, rCfg RetrySettings, _ internal.RequestUnmarshaler, nextSender requestSender, logger *zap.Logger) *queuedRetrySender {

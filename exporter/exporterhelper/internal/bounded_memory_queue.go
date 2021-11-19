@@ -28,15 +28,15 @@ import (
 // channels, with a special Reaper goroutine that wakes up when the queue is full and consumers
 // the items from the top of the queue until its size drops back to maxSize
 type boundedMemoryQueue struct {
-	workers       int
-	stopWG        sync.WaitGroup
+	onDroppedItem func(item interface{})
+	factory       func() consumer
 	size          *uatomic.Uint32
 	capacity      *uatomic.Uint32
 	stopped       *uatomic.Uint32
 	items         *chan interface{}
-	onDroppedItem func(item interface{})
-	factory       func() consumer
 	stopCh        chan struct{}
+	workers       int
+	stopWG        sync.WaitGroup
 }
 
 // NewBoundedMemoryQueue constructs the new queue of specified capacity, and with an optional

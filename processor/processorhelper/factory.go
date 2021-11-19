@@ -41,11 +41,11 @@ type CreateLogsProcessor func(context.Context, component.ProcessorCreateSettings
 
 type factory struct {
 	internalinterface.BaseInternal
-	cfgType                config.Type
 	createDefaultConfig    CreateDefaultConfig
 	createTracesProcessor  CreateTracesProcessor
 	createMetricsProcessor CreateMetricsProcessor
 	createLogsProcessor    CreateLogsProcessor
+	cfgType                config.Type
 }
 
 // WithTraces overrides the default "error not supported" implementation for CreateTracesProcessor.

@@ -111,11 +111,11 @@ func createReceiver(cfg config.Receiver) *ExampleReceiverProducer {
 
 // ExampleReceiverProducer allows producing traces and metrics for testing purposes.
 type ExampleReceiverProducer struct {
-	Started bool
-	Stopped bool
 	consumer.Traces
 	consumer.Metrics
 	consumer.Logs
+	Started bool
+	Stopped bool
 }
 
 // Start tells the receiver to start its processing.

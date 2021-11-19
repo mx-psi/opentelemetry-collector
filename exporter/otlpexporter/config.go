@@ -22,12 +22,11 @@ import (
 
 // Config defines configuration for OpenCensus exporter.
 type Config struct {
-	config.ExporterSettings        `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct
-	exporterhelper.TimeoutSettings `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct.
-	exporterhelper.QueueSettings   `mapstructure:"sending_queue"`
+	config.ExporterSettings        `mapstructure:",squash"`
+	configgrpc.GRPCClientSettings  `mapstructure:",squash"`
 	exporterhelper.RetrySettings   `mapstructure:"retry_on_failure"`
-
-	configgrpc.GRPCClientSettings `mapstructure:",squash"` // squash ensures fields are correctly decoded in embedded struct.
+	exporterhelper.QueueSettings   `mapstructure:"sending_queue"`
+	exporterhelper.TimeoutSettings `mapstructure:",squash"`
 }
 
 var _ config.Exporter = (*Config)(nil)

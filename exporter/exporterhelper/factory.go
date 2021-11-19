@@ -40,11 +40,11 @@ type CreateLogsExporter func(context.Context, component.ExporterCreateSettings, 
 
 type factory struct {
 	internalinterface.BaseInternal
-	cfgType               config.Type
 	createDefaultConfig   CreateDefaultConfig
 	createTracesExporter  CreateTracesExporter
 	createMetricsExporter CreateMetricsExporter
 	createLogsExporter    CreateLogsExporter
+	cfgType               config.Type
 }
 
 // WithTraces overrides the default "error not supported" implementation for CreateTracesReceiver.

@@ -22,14 +22,9 @@ import (
 
 // Service defines the configurable components of the service.
 type Service struct {
-	// Telemetry is the configuration for collector's own telemetry.
-	Telemetry ServiceTelemetry `mapstructure:"telemetry"`
-
-	// Extensions are the ordered list of extensions configured for the service.
-	Extensions []ComponentID `mapstructure:"extensions"`
-
-	// Pipelines are the set of data pipelines configured for the service.
-	Pipelines Pipelines `mapstructure:"pipelines"`
+	Pipelines  Pipelines        `mapstructure:"pipelines"`
+	Telemetry  ServiceTelemetry `mapstructure:"telemetry"`
+	Extensions []ComponentID    `mapstructure:"extensions"`
 }
 
 // ServiceTelemetry defines the configurable settings for service telemetry.
@@ -45,16 +40,9 @@ func (srvT *ServiceTelemetry) validate() error {
 // This MUST be compatible with zap.Config. Cannot use directly zap.Config because
 // the collector uses mapstructure and not yaml tags.
 type ServiceTelemetryLogs struct {
-	// Level is the minimum enabled logging level.
-	Level zapcore.Level `mapstructure:"level"`
-
-	// Development puts the logger in development mode, which changes the
-	// behavior of DPanicLevel and takes stacktraces more liberally.
-	Development bool `mapstructure:"development"`
-
-	// Encoding sets the logger's encoding.
-	// Valid values are "json" and "console".
-	Encoding string `mapstructure:"encoding"`
+	Encoding    string        `mapstructure:"encoding"`
+	Level       zapcore.Level `mapstructure:"level"`
+	Development bool          `mapstructure:"development"`
 }
 
 func (srvTL *ServiceTelemetryLogs) validate() error {

@@ -26,50 +26,20 @@ import (
 
 // svcSettings holds configuration for building a new service.
 type svcSettings struct {
-	// Factories component factories.
-	Factories component.Factories
-
-	// BuildInfo provides collector start information.
-	BuildInfo component.BuildInfo
-
-	// Config represents the configuration of the service.
-	Config *config.Config
-
-	// Telemetry represents the service configured telemetry for all the components.
-	Telemetry component.TelemetrySettings
-
-	// ZPagesSpanProcessor represents the SpanProcessor for tracez page.
+	Telemetry           component.TelemetrySettings
+	Factories           component.Factories
+	Config              *config.Config
 	ZPagesSpanProcessor *zpages.SpanProcessor
-
-	// AsyncErrorChannel is the channel that is used to report fatal errors.
-	AsyncErrorChannel chan error
+	AsyncErrorChannel   chan error
+	BuildInfo           component.BuildInfo
 }
 
 // CollectorSettings holds configuration for creating a new Collector.
 type CollectorSettings struct {
-	// Factories component factories.
-	Factories component.Factories
-
-	// BuildInfo provides collector start information.
-	BuildInfo component.BuildInfo
-
-	// DisableGracefulShutdown disables the automatic graceful shutdown
-	// of the collector on SIGINT or SIGTERM.
-	// Users who want to handle signals themselves can disable this behavior
-	// and manually handle the signals to shutdown the collector.
+	Factories               component.Factories
+	ConfigMapProvider       configmapprovider.Provider
+	ConfigUnmarshaler       configunmarshaler.ConfigUnmarshaler
+	BuildInfo               component.BuildInfo
+	LoggingOptions          []zap.Option
 	DisableGracefulShutdown bool
-
-	// ConfigMapProvider provides the configuration's config.Map.
-	// If it is not provided a default provider is used. The default provider loads the configuration
-	// from a config file define by the --config command line flag and overrides component's configuration
-	// properties supplied via --set command line flag.
-	// If the provider is configmapprovider.WatchableRetrieved, collector may reload the configuration upon error.
-	ConfigMapProvider configmapprovider.Provider
-
-	// ConfigUnmarshaler unmarshalls the configuration's Parser into the service configuration.
-	// If it is not provided a default unmarshaler is used.
-	ConfigUnmarshaler configunmarshaler.ConfigUnmarshaler
-
-	// LoggingOptions provides a way to change behavior of zap logging.
-	LoggingOptions []zap.Option
 }

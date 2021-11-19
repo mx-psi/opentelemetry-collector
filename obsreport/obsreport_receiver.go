@@ -31,24 +31,19 @@ import (
 
 // Receiver is a helper to add observability to a component.Receiver.
 type Receiver struct {
+	tracer         trace.Tracer
 	spanNamePrefix string
 	transport      string
-	longLivedCtx   bool
 	mutators       []tag.Mutator
-	tracer         trace.Tracer
+	longLivedCtx   bool
 }
 
 // ReceiverSettings are settings for creating an Receiver.
 type ReceiverSettings struct {
-	ReceiverID config.ComponentID
-	Transport  string
-	// LongLivedCtx when true indicates that the context passed in the call
-	// outlives the individual receive operation.
-	// Typically the long lived context is associated to a connection,
-	// eg.: a gRPC stream, for which many batches of data are received in individual
-	// operations without a corresponding new context per operation.
-	LongLivedCtx           bool
 	ReceiverCreateSettings component.ReceiverCreateSettings
+	ReceiverID             config.ComponentID
+	Transport              string
+	LongLivedCtx           bool
 }
 
 // NewReceiver creates a new Receiver.

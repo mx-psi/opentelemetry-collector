@@ -29,17 +29,16 @@ import (
 
 // service represents the implementation of a component.Host.
 type service struct {
-	factories           component.Factories
-	buildInfo           component.BuildInfo
-	config              *config.Config
 	telemetry           component.TelemetrySettings
+	factories           component.Factories
+	builtReceivers      builder.Receivers
+	config              *config.Config
 	zPagesSpanProcessor *zpages.SpanProcessor
 	asyncErrorChannel   chan error
-
-	builtExporters  builder.Exporters
-	builtReceivers  builder.Receivers
-	builtPipelines  builder.BuiltPipelines
-	builtExtensions extensions.Extensions
+	builtExporters      builder.Exporters
+	builtPipelines      builder.BuiltPipelines
+	builtExtensions     extensions.Extensions
+	buildInfo           component.BuildInfo
 }
 
 func newService(set *svcSettings) (*service, error) {

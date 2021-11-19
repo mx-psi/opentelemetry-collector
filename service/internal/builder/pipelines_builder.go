@@ -32,18 +32,13 @@ import (
 // It can have a trace and/or a metrics consumer (the consumer is either the first
 // processor in the pipeline or the exporter if pipeline has no processors).
 type builtPipeline struct {
-	logger  *zap.Logger
-	firstTC consumer.Traces
-	firstMC consumer.Metrics
-	firstLC consumer.Logs
-
-	// Config is the configuration of this Pipeline.
-	Config *config.Pipeline
-	// MutatesData is set to true if any processors in the pipeline
-	// can mutate the TraceData or MetricsData input argument.
+	firstTC     consumer.Traces
+	firstMC     consumer.Metrics
+	firstLC     consumer.Logs
+	logger      *zap.Logger
+	Config      *config.Pipeline
+	processors  []component.Processor
 	MutatesData bool
-
-	processors []component.Processor
 }
 
 // BuiltPipelines is a map of build pipelines created from pipeline configs.
@@ -83,10 +78,10 @@ func (bps BuiltPipelines) ShutdownProcessors(ctx context.Context) error {
 // pipelinesBuilder builds Pipelines from config.
 type pipelinesBuilder struct {
 	settings  component.TelemetrySettings
-	buildInfo component.BuildInfo
 	config    *config.Config
 	exporters Exporters
 	factories map[config.Type]component.ProcessorFactory
+	buildInfo component.BuildInfo
 }
 
 // BuildPipelines builds pipeline processors from config. Requires exporters to be already
@@ -98,7 +93,7 @@ func BuildPipelines(
 	exporters Exporters,
 	factories map[config.Type]component.ProcessorFactory,
 ) (BuiltPipelines, error) {
-	pb := &pipelinesBuilder{settings, buildInfo, config, exporters, factories}
+	pb := &pipelinesBuilder{settings, config, exporters, factories, buildInfo}
 
 	pipelineProcessors := make(BuiltPipelines)
 	for pipelineID, pipeline := range pb.config.Service.Pipelines {

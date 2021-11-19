@@ -32,10 +32,10 @@ import (
 
 // Scraper is a helper to add observability to a component.Scraper.
 type Scraper struct {
+	tracer     trace.Tracer
 	receiverID config.ComponentID
 	scraper    config.ComponentID
 	mutators   []tag.Mutator
-	tracer     trace.Tracer
 }
 
 // ScraperSettings are settings for creating a Scraper.
