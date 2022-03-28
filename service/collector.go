@@ -196,7 +196,9 @@ func (col *Collector) setupConfigurationComponents(ctx context.Context) error {
 		return fmt.Errorf("failed to get logger: %w", err)
 	}
 
-	telemetrylogs.SetColGRPCLogger(col.logger, cfg.Service.Telemetry.Logs.Level)
+	if !cfg.Service.Telemetry.Logs.DisableGRPCLogger {
+		telemetrylogs.SetColGRPCLogger(col.logger, cfg.Service.Telemetry.Logs.Level)
+	}
 
 	col.service, err = newService(&svcSettings{
 		BuildInfo: col.set.BuildInfo,

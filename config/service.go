@@ -66,6 +66,10 @@ type ServiceTelemetryLogs struct {
 	// (default = false)
 	DisableStacktrace bool `mapstructure:"disable_stacktrace"`
 
+	// DisableGRPCLogger disables setting the Collector logger as the grpc-go logger. By default,
+	// a grpc-go logger will be built from the Collector logger and will log with "grpc_log" set to true.
+	DisableGRPCLogger bool `mapstructure:"disable_grpc_logger"`
+
 	// OutputPaths is a list of URLs or file paths to write logging output to.
 	// The URLs could only be with "file" schema or without schema.
 	// The URLs with "file" schema must be an absolute path.

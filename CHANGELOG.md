@@ -49,6 +49,7 @@
   In case of type mismatch, they don't panic right away but return an invalid zero-initialized
   instance for consistency with other OneOf field accessors (#5034)
 - Update OTLP to v0.15.0 (#5064)
+- The gRPC logger override can now be disabled by setting the `service::telemetry::logs::disable_grpc_logger` flag (#TODO)
 
 ### 🧰 Bug fixes 🧰
 
