@@ -10,7 +10,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
 	github.com/klauspost/compress v1.15.1
-	github.com/knadh/koanf v1.4.0
+	github.com/knadh/koanf v1.4.2
 	github.com/magiconair/properties v1.8.6
 	github.com/mitchellh/mapstructure v1.4.3
 	github.com/mostynb/go-grpc-compression v1.1.16
@@ -34,6 +34,7 @@ require (
 	go.uber.org/atomic v1.9.0
 	go.uber.org/multierr v1.8.0
 	go.uber.org/zap v1.21.0
+	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d
 	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9
 	google.golang.org/genproto v0.0.0-20211208223120-3a66f561d7aa
 	google.golang.org/grpc v1.45.0
@@ -69,9 +70,8 @@ require (
 	github.com/tklauser/go-sysconf v0.3.9 // indirect
 	github.com/tklauser/numcpus v0.3.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.0 // indirect
 )
 
 replace go.opentelemetry.io/collector/model => ./model
