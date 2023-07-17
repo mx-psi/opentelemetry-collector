@@ -11,7 +11,7 @@ require (
 	github.com/pavius/impi v0.0.3
 	github.com/tcnksm/ghr v0.16.0
 	github.com/wadey/gocovmerge v0.0.0-20160331181800-b5bfa59ec0ad
-	go.opentelemetry.io/build-tools/checkdoc v0.1.0
+	go.opentelemetry.io/build-tools/checkdoc v0.9.0
 	go.opentelemetry.io/build-tools/crosslink v0.1.0
 	go.opentelemetry.io/build-tools/multimod v0.1.0
 	go.opentelemetry.io/build-tools/semconvgen v0.1.0
@@ -176,8 +176,8 @@ require (
 	github.com/spf13/viper v1.13.0 // indirect
 	github.com/ssgreg/nlreturn/v2 v2.2.1 // indirect
 	github.com/stbenjam/no-sprintf-host-port v0.1.1 // indirect
-	github.com/stretchr/objx v0.4.0 // indirect
-	github.com/stretchr/testify v1.8.0 // indirect
+	github.com/stretchr/objx v0.5.0 // indirect
+	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/subosito/gotenv v1.4.1 // indirect
 	github.com/tcnksm/go-gitconfig v0.1.2 // indirect
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e // indirect
