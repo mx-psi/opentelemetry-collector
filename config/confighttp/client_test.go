@@ -429,7 +429,12 @@ func TestHTTPClientSettingWithAuthConfig(t *testing.T) {
 			settings: ClientConfig{
 				Endpoint: "localhost:1234",
 				Auth:     configoptional.Some(configauth.Config{AuthenticatorID: mockID}),
-				Headers:  configopaque.MapListFromMap(map[string]configopaque.String{"foo": "bar"}),
+				Headers: &configopaque.MapList{
+					{
+						Name:  "foo",
+						Value: "bar",
+					},
+				},
 			},
 			shouldErr: false,
 			host: &mockHost{
@@ -724,10 +729,16 @@ func TestClientUnmarshalYAMLComprehensiveConfig(t *testing.T) {
 	assert.Equal(t, "example.com", clientConfig.TLS.ServerName)
 
 	// Verify headers
-	expectedHeaders := configopaque.MapListFromMap(map[string]configopaque.String{
-		"User-Agent":      "OpenTelemetry-Collector/1.0",
-		"X-Custom-Header": "custom-value",
-	})
+	expectedHeaders := &configopaque.MapList{
+		{
+			Name:  "User-Agent",
+			Value: "OpenTelemetry-Collector/1.0",
+		},
+		{
+			Name:  "X-Custom-Header",
+			Value: "custom-value",
+		},
+	}
 	assert.Equal(t, expectedHeaders, clientConfig.Headers)
 
 	// Verify middlewares

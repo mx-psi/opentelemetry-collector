@@ -1138,10 +1138,16 @@ func TestServerUnmarshalYAMLComprehensiveConfig(t *testing.T) {
 	assert.Equal(t, 7200, serverConfig.CORS.Get().MaxAge)
 
 	// Verify response headers
-	expectedResponseHeaders := configopaque.MapListFromMap(map[string]configopaque.String{
-		"Server":   "OpenTelemetry-Collector",
-		"X-Flavor": "apple",
-	})
+	expectedResponseHeaders := &configopaque.MapList{
+		{
+			Name:  "Server",
+			Value: "OpenTelemetry-Collector",
+		},
+		{
+			Name:  "X-Flavor",
+			Value: "apple",
+		},
+	}
 	assert.Equal(t, expectedResponseHeaders, serverConfig.ResponseHeaders)
 
 	// Verify compression algorithms
