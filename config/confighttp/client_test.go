@@ -510,19 +510,19 @@ func TestHTTPClientSettingWithAuthConfig(t *testing.T) {
 func TestHttpClientHeaders(t *testing.T) {
 	tests := []struct {
 		name    string
-		headers map[string]configopaque.String
+		headers *configopaque.MapList
 	}{
 		{
 			name: "with_headers",
-			headers: map[string]configopaque.String{
-				"header1": "value1",
+			headers: &configopaque.MapList{
+				{Name: "header1", Value: "value1"},
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				for k, v := range tt.headers {
+				for k, v := range tt.headers.Iter {
 					assert.Equal(t, r.Header.Get(k), string(v))
 				}
 				w.WriteHeader(http.StatusOK)
@@ -535,7 +535,7 @@ func TestHttpClientHeaders(t *testing.T) {
 				ReadBufferSize:  0,
 				WriteBufferSize: 0,
 				Timeout:         0,
-				Headers:         configopaque.MapListFromMap(tt.headers),
+				Headers:         tt.headers,
 			}
 			client, _ := setting.ToClient(context.Background(), componenttest.NewNopHost(), componenttest.NewNopTelemetrySettings())
 			req, err := http.NewRequest(http.MethodGet, setting.Endpoint, http.NoBody)
@@ -550,11 +550,11 @@ func TestHttpClientHostHeader(t *testing.T) {
 	hostHeader := "th"
 	tt := struct {
 		name    string
-		headers map[string]configopaque.String
+		headers *configopaque.MapList
 	}{
 		name: "with_host_header",
-		headers: map[string]configopaque.String{
-			"Host": configopaque.String(hostHeader),
+		headers: &configopaque.MapList{
+			{Name: "Host", Value: configopaque.String(hostHeader)},
 		},
 	}
 
@@ -571,7 +571,7 @@ func TestHttpClientHostHeader(t *testing.T) {
 			ReadBufferSize:  0,
 			WriteBufferSize: 0,
 			Timeout:         0,
-			Headers:         configopaque.MapListFromMap(tt.headers),
+			Headers:         tt.headers,
 		}
 		client, _ := setting.ToClient(context.Background(), componenttest.NewNopHost(), componenttest.NewNopTelemetrySettings())
 		req, err := http.NewRequest(http.MethodGet, setting.Endpoint, http.NoBody)
