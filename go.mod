@@ -1,6 +1,6 @@
 module go.opentelemetry.io/collector
 
-go 1.18
+go 1.23
 
 require (
 	contrib.go.opencensus.io/exporter/prometheus v0.4.2
@@ -40,7 +40,7 @@ require (
 	golang.org/x/sys v0.0.0-20220808155132-1c4a2a72c664
 	google.golang.org/genproto v0.0.0-20211208223120-3a66f561d7aa
 	google.golang.org/grpc v1.50.0
-	google.golang.org/protobuf v1.28.1
+	google.golang.org/protobuf v1.36.11
 	gopkg.in/yaml.v3 v3.0.1
 )
 
