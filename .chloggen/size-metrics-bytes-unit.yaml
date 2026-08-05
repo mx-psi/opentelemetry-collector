@@ -1,0 +1,12 @@
+change_type: bug_fix
+
+component: pkg/service
+
+note: Report the `otelcol.*.consumed.size` and `otelcol.*.produced.size` metrics with unit `By` instead of `{item}`
+
+issues: []
+
+subtext: |
+  These metrics record the ProtoMarshaler.Sizer byte size of the data, not an item count.
+
+change_logs: [user]

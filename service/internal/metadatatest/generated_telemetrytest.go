@@ -32,7 +32,7 @@ func AssertEqualConnectorConsumedSize(t *testing.T, tt *componenttest.Telemetry,
 	want := metricdata.Metrics{
 		Name:        "otelcol.connector.consumed.size",
 		Description: "Size of items passed to the connector, based on ProtoMarshaler.Sizer. [Development]",
-		Unit:        "{item}",
+		Unit:        "By",
 		Data: metricdata.Sum[int64]{
 			Temporality: metricdata.CumulativeTemporality,
 			IsMonotonic: true,
@@ -64,7 +64,7 @@ func AssertEqualConnectorProducedSize(t *testing.T, tt *componenttest.Telemetry,
 	want := metricdata.Metrics{
 		Name:        "otelcol.connector.produced.size",
 		Description: "Size of items emitted from the connector, based on ProtoMarshaler.Sizer. [Development]",
-		Unit:        "{item}",
+		Unit:        "By",
 		Data: metricdata.Sum[int64]{
 			Temporality: metricdata.CumulativeTemporality,
 			IsMonotonic: true,
@@ -96,7 +96,7 @@ func AssertEqualExporterConsumedSize(t *testing.T, tt *componenttest.Telemetry, 
 	want := metricdata.Metrics{
 		Name:        "otelcol.exporter.consumed.size",
 		Description: "Size of items passed to the exporter, based on ProtoMarshaler.Sizer. [Development]",
-		Unit:        "{item}",
+		Unit:        "By",
 		Data: metricdata.Sum[int64]{
 			Temporality: metricdata.CumulativeTemporality,
 			IsMonotonic: true,
@@ -218,7 +218,7 @@ func AssertEqualProcessorConsumedSize(t *testing.T, tt *componenttest.Telemetry,
 	want := metricdata.Metrics{
 		Name:        "otelcol.processor.consumed.size",
 		Description: "Size of items passed to the processor, based on ProtoMarshaler.Sizer. [Development]",
-		Unit:        "{item}",
+		Unit:        "By",
 		Data: metricdata.Sum[int64]{
 			Temporality: metricdata.CumulativeTemporality,
 			IsMonotonic: true,
@@ -250,7 +250,7 @@ func AssertEqualProcessorProducedSize(t *testing.T, tt *componenttest.Telemetry,
 	want := metricdata.Metrics{
 		Name:        "otelcol.processor.produced.size",
 		Description: "Size of items emitted from the processor, based on ProtoMarshaler.Sizer. [Development]",
-		Unit:        "{item}",
+		Unit:        "By",
 		Data: metricdata.Sum[int64]{
 			Temporality: metricdata.CumulativeTemporality,
 			IsMonotonic: true,
@@ -282,7 +282,7 @@ func AssertEqualReceiverProducedSize(t *testing.T, tt *componenttest.Telemetry, 
 	want := metricdata.Metrics{
 		Name:        "otelcol.receiver.produced.size",
 		Description: "Size of items emitted from the receiver, based on ProtoMarshaler.Sizer. [Development]",
-		Unit:        "{item}",
+		Unit:        "By",
 		Data: metricdata.Sum[int64]{
 			Temporality: metricdata.CumulativeTemporality,
 			IsMonotonic: true,
