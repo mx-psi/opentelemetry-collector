@@ -121,9 +121,6 @@ generate:
 moddownload:
 	$(GOCMD) mod download
 
-timebenchmark:
-	go test -bench=. -benchtime=1s ./...
-
 SRC ?= '$(CURDIR)'
 FLAGS ?= '-o=$(CURDIR)/'
 
